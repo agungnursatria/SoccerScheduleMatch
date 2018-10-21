@@ -1,8 +1,8 @@
-package com.anb.soccerschedulematch.Api
+package com.anb.soccerschedulematch.api
 
-import com.anb.soccerschedulematch.Model.League.LeagueResponse
-import com.anb.soccerschedulematch.Model.Match.MatchResponse
-import com.anb.soccerschedulematch.Model.Team.TeamResponse
+import com.anb.soccerschedulematch.model.league.LeagueResponse
+import com.anb.soccerschedulematch.model.match.MatchResponse
+import com.anb.soccerschedulematch.model.team.TeamResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

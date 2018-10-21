@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Helper
+package com.anb.soccerschedulematch.helper
 
 object Constant {
     const val ID_LEAGUE : String = "idLeague"

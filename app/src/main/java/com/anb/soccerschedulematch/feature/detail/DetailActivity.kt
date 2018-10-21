@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Feature.Detail
+package com.anb.soccerschedulematch.feature.detail
 
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.anb.soccerschedulematch.Database.database
-import com.anb.soccerschedulematch.Helper.Constant
-import com.anb.soccerschedulematch.Helper.Utils
-import com.anb.soccerschedulematch.Model.Match.Match
+import com.anb.soccerschedulematch.database.database
+import com.anb.soccerschedulematch.helper.Constant
+import com.anb.soccerschedulematch.helper.Utils
+import com.anb.soccerschedulematch.model.match.Match
 import com.anb.soccerschedulematch.R
 import com.anb.soccerschedulematch.R.menu.detail_menu
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -18,7 +18,6 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.toast
 
 class DetailActivity : AppCompatActivity() {
     var menuDetail : Menu? = null

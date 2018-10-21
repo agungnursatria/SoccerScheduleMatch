@@ -1,10 +1,10 @@
-package com.anb.soccerschedulematch.Helper
+package com.anb.soccerschedulematch.helper
 
 import android.view.View
 import android.widget.ImageView
-import com.anb.soccerschedulematch.Api.RetroServer
-import com.anb.soccerschedulematch.Model.Match.Match
-import com.anb.soccerschedulematch.Model.Team.TeamResponse
+import com.anb.soccerschedulematch.api.RetroServer
+import com.anb.soccerschedulematch.model.match.Match
+import com.anb.soccerschedulematch.model.team.TeamResponse
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

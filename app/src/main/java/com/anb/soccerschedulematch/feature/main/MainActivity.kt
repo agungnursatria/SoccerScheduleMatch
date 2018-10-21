@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Feature.Main
+package com.anb.soccerschedulematch.feature.main
 
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -11,9 +11,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.anb.soccerschedulematch.Adapter.MainPagerAdapter
-import com.anb.soccerschedulematch.Helper.Utils
-import com.anb.soccerschedulematch.Model.League.LeagueResponse
+import com.anb.soccerschedulematch.adapter.MainPagerAdapter
+import com.anb.soccerschedulematch.helper.Utils
+import com.anb.soccerschedulematch.model.league.LeagueResponse
 import com.anb.soccerschedulematch.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout

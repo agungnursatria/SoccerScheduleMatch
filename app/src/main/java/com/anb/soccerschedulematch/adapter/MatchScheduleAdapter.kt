@@ -1,21 +1,14 @@
-package com.anb.soccerschedulematch.Adapter
+package com.anb.soccerschedulematch.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.anb.soccerschedulematch.Api.RetroServer
-import com.anb.soccerschedulematch.Helper.Utils
-import com.anb.soccerschedulematch.Model.Match.Match
-import com.anb.soccerschedulematch.Model.Team.TeamResponse
+import com.anb.soccerschedulematch.helper.Utils
+import com.anb.soccerschedulematch.model.match.Match
 import com.anb.soccerschedulematch.R
-import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MatchScheduleAdapter(private val matchList: ArrayList<Match>, private val listener: (Match) -> Unit): RecyclerView.Adapter<MatchScheduleVH>(){

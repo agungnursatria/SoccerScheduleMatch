@@ -1,8 +1,8 @@
-package com.anb.soccerschedulematch.Database
+package com.anb.soccerschedulematch.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.anb.soccerschedulematch.Model.Match.Match
+import com.anb.soccerschedulematch.model.match.Match
 import org.jetbrains.anko.db.*
 
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favorites.db", null, 1) {

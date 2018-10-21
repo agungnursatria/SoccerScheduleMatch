@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Model.Match
+package com.anb.soccerschedulematch.model.match
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Api
+package com.anb.soccerschedulematch.api
 
 import com.anb.soccerschedulematch.BuildConfig
 import retrofit2.Retrofit
@@ -8,7 +8,7 @@ object RetroServer {
 
     private var retrofit: Retrofit? = null
 
-    fun getClient(): Retrofit {
+    private fun getClient(): Retrofit {
 
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
@@ -17,7 +17,7 @@ object RetroServer {
                     .build()
         }
 
-        return retrofit!!
+        return retrofit as Retrofit
     }
 
     fun getRequestService(): RequestInterface {

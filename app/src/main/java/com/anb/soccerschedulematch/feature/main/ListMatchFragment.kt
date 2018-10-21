@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Feature.Main
+package com.anb.soccerschedulematch.feature.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.anb.soccerschedulematch.Adapter.MatchScheduleAdapter
-import com.anb.soccerschedulematch.Database.database
-import com.anb.soccerschedulematch.Feature.Detail.DetailActivity
-import com.anb.soccerschedulematch.Helper.Constant
-import com.anb.soccerschedulematch.Helper.Utils
-import com.anb.soccerschedulematch.Model.Match.Match
-import com.anb.soccerschedulematch.Model.Match.MatchResponse
+import com.anb.soccerschedulematch.adapter.MatchScheduleAdapter
+import com.anb.soccerschedulematch.database.database
+import com.anb.soccerschedulematch.feature.detail.DetailActivity
+import com.anb.soccerschedulematch.helper.Constant
+import com.anb.soccerschedulematch.helper.Utils
+import com.anb.soccerschedulematch.model.match.Match
+import com.anb.soccerschedulematch.model.match.MatchResponse
 import com.anb.soccerschedulematch.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser

@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.Model.Team
+package com.anb.soccerschedulematch.model.team
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

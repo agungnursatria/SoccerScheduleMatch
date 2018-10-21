@@ -113,9 +113,9 @@ class MatchScheduleVH(val view: View) : RecyclerView.ViewHolder(view){
         with(match){
             dateEvent?.let { tvDateMatch.text = Utils.formatDate(it) }
             strHomeTeam?.let { tvHomeTeamName.text = it }
-            intHomeScore?.let { tvHomeTeamScore.text = it.toString() }
+            strHomeScore?.let { tvHomeTeamScore.text = it }
             strAwayTeam?.let { tvAwayTeamName.text = it }
-            intAwayScore?.let { tvAwayTeamScore.text = it.toString() }
+            strAwayScore?.let { tvAwayTeamScore.text = it }
 
             idHomeTeam?.let { Utils.getImageBadgeTeam(it, imgHomeTeam) }
             idAwayTeam?.let { Utils.getImageBadgeTeam(it, imgAwayTeam) }

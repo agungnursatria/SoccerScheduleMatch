@@ -10,12 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.anb.soccerschedulematch.Adapter.MatchScheduleAdapter
+import com.anb.soccerschedulematch.Database.database
 import com.anb.soccerschedulematch.Feature.Detail.DetailActivity
 import com.anb.soccerschedulematch.Helper.Constant
 import com.anb.soccerschedulematch.Helper.Utils
+import com.anb.soccerschedulematch.Model.Match.Match
 import com.anb.soccerschedulematch.Model.Match.MatchResponse
 import com.anb.soccerschedulematch.R
 import org.jetbrains.anko.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
@@ -28,8 +32,8 @@ import retrofit2.Response
 class ListMatchFragment : Fragment() {
     private lateinit var rvLeague : RecyclerView
     private lateinit var swipeRefreshLayout : SwipeRefreshLayout
-    lateinit var idLeague : String
-    var position: Int = 0
+    private lateinit var idLeague : String
+    private var position: Int = 0
 
     companion object {
         fun newInstance(id: String, position: Int) : ListMatchFragment{
@@ -74,7 +78,13 @@ class ListMatchFragment : Fragment() {
                 })
             }
             2 -> {
-                swipeRefreshLayout.isRefreshing = false
+                context?.database?.use {
+                    val matchResponse = MatchResponse()
+                    val result = select(Match.TABLE_MATCH)
+                    val favoriteMatch = result.parseList(classParser<Match>())
+                    matchResponse.matchs?.addAll(favoriteMatch)
+                    setDataToRecyclerView(matchResponse)
+                }
             }
         }
     }

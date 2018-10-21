@@ -81,8 +81,8 @@ class ListMatchFragment : Fragment() {
                 context?.database?.use {
                     val matchResponse = MatchResponse()
                     val result = select(Match.TABLE_MATCH)
-                    val favoriteMatch = result.parseList(classParser<Match>())
-                    matchResponse.matchs?.addAll(favoriteMatch)
+                    val favoriteMatch : ArrayList<Match> = ArrayList(result.parseList(classParser<Match>()))
+                    matchResponse.matchs = favoriteMatch
                     setDataToRecyclerView(matchResponse)
                 }
             }

@@ -1,5 +1,6 @@
 package com.anb.soccerschedulematch.adapter
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
@@ -25,6 +26,7 @@ class MatchScheduleAdapter(private val matchList: ArrayList<Match>, private val 
 }
 
 class MatchScheduleUI: AnkoComponent<ViewGroup>{
+    @SuppressLint("SetTextI18n")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui){
         verticalLayout {
             lparams(matchParent, wrapContent)

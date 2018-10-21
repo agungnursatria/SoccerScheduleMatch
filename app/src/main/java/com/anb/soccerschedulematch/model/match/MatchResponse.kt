@@ -6,4 +6,4 @@ import com.google.gson.annotations.SerializedName
 data class MatchResponse(
         @SerializedName("events")
         @Expose
-        val matchs: ArrayList<Match>? = null)
+        var matchs: ArrayList<Match>? = null)

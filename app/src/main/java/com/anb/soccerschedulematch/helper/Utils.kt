@@ -36,9 +36,8 @@ object Utils {
     }
 
     fun semicolonReplacer(text: String): String {
-        var newText = text.replace("; ","\n")
+        return text.replace("; ","\n")
                 .replace(";","\n")
-        return newText
     }
 
     fun removeNullString(match: Match) : Match{

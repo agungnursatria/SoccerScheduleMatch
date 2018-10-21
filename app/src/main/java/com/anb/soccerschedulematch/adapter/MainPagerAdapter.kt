@@ -16,11 +16,11 @@ class MainPagerAdapter(fm: FragmentManager, val id: String) : FragmentStatePager
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        when (position) {
-            0 -> return "Last Match"
-            1 -> return "Next Match"
-            2 -> return "Favorite"
-            else -> return null
+        return when (position) {
+            0 -> "Last Match"
+            1 -> "Next Match"
+            2 -> "Favorite"
+            else -> null
         }
 
     }

@@ -2,19 +2,17 @@ package com.anb.soccerschedulematch.Feature.Detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
 import com.anb.soccerschedulematch.Helper.Constant
 import com.anb.soccerschedulematch.Helper.Utils
 import com.anb.soccerschedulematch.Model.Match.Match
-import com.anb.soccerschedulematch.Model.Match.MatchResponse
 import com.anb.soccerschedulematch.R
+import com.anb.soccerschedulematch.R.menu.detail_menu
 import kotlinx.android.synthetic.main.activity_detail.*
-import org.jetbrains.anko.toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
+    lateinit var menuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +20,14 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val idEvent = intent.getStringExtra(Constant.ID_MATCH)
-        initMatchDetail(idEvent)
+        val match = intent.getParcelableExtra<Match>(Constant.MATCH)
+        setView(match)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(detail_menu, menu)
+        menu?.getItem(0)?.let { menuItem = it }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -34,20 +38,6 @@ class DetailActivity : AppCompatActivity() {
             else -> {}
         }
         return true
-    }
-
-    private fun initMatchDetail(idEvent: String) {
-        val matchDetailCall = Utils.request.getEventDetail(idEvent)
-        matchDetailCall.enqueue(object : Callback<MatchResponse>{
-            override fun onFailure(call: Call<MatchResponse>?, t: Throwable?) {
-                t?.message?.let { toast(it) }
-            }
-
-            override fun onResponse(call: Call<MatchResponse>?, response: Response<MatchResponse>?) {
-                response?.body()?.let { setView(it.matchs[0]) }
-            }
-
-        })
     }
 
     private fun setView(match: Match) {

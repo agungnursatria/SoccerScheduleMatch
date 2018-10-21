@@ -6,12 +6,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.anb.soccerschedulematch.Adapter.MatchScheduleAdapter
-import com.anb.soccerschedulematch.Api.RetroServer
 import com.anb.soccerschedulematch.Feature.Detail.DetailActivity
 import com.anb.soccerschedulematch.Helper.Constant
 import com.anb.soccerschedulematch.Helper.Utils
@@ -61,28 +59,38 @@ class ListMatchFragment : Fragment() {
 
     private fun loadData() {
         swipeRefreshLayout.isRefreshing = true
-        val matchCall = if (position == 0) Utils.request.getPrevMatch(idLeague) else Utils.request.getNextMatch(idLeague)
-        matchCall.enqueue(object : Callback<MatchResponse>{
-            override fun onFailure(call: Call<MatchResponse>?, t: Throwable?) {
-                t?.message?.let { toast(it) }
-            }
+        when(position){
+            in 0..1 -> {
+                val matchCall = if (position == 0) Utils.request.getPrevMatch(idLeague) else Utils.request.getNextMatch(idLeague)
+                matchCall.enqueue(object : Callback<MatchResponse>{
+                    override fun onFailure(call: Call<MatchResponse>?, t: Throwable?) {
+                        t?.message?.let { toast(it) }
+                    }
 
-            override fun onResponse(call: Call<MatchResponse>?, response: Response<MatchResponse>?) {
-                response?.body()?.let { setDataToRecyclerView(it) }
-            }
+                    override fun onResponse(call: Call<MatchResponse>?, response: Response<MatchResponse>?) {
+                        response?.body()?.let { setDataToRecyclerView(it) }
+                    }
 
-        })
+                })
+            }
+            2 -> {
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
     }
 
     private fun setDataToRecyclerView(matchResponse: MatchResponse) {
         val layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
-        val matchScheduleAdapter = MatchScheduleAdapter(matchResponse.matchs){
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(Constant.ID_MATCH, it.idEvent)
-            context?.startActivity(intent)
-        }
         rvLeague.layoutManager = layoutManager
-        rvLeague.adapter = matchScheduleAdapter
+
+        matchResponse.matchs?.let {
+            val matchScheduleAdapter = MatchScheduleAdapter(it){
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra(Constant.MATCH, it)
+                context?.startActivity(intent)
+            }
+            rvLeague.adapter = matchScheduleAdapter
+        }
 
         swipeRefreshLayout.isRefreshing = false
     }

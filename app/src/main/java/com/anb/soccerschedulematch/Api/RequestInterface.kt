@@ -21,6 +21,4 @@ interface RequestInterface {
     @GET("api/v1/json/1/lookupteam.php")
     fun getTeamDetail(@Query("id") idTeam: String) : Call<TeamResponse>
 
-    @GET("api/v1/json/1/lookupevent.php")
-    fun getEventDetail(@Query("id") idEvent: String) : Call<MatchResponse>
 }

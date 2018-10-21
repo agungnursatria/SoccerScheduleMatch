@@ -1,8 +1,11 @@
 package com.anb.soccerschedulematch.Model.Match
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Match (
         @SerializedName("idEvent")
         @Expose
@@ -208,7 +211,38 @@ data class Match (
         @Expose
         var strLocked: String? = null
 
-) {
+) : Parcelable {
+
+        companion object {
+                const val TABLE_MATCH = "TABLE_FAVORITE_MATCH"
+                const val ID_EVENT = "ID_EVENT"
+                const val DATE_EVENT = "DATE_EVENT"
+                const val HOME_NAME = "HOME_HAME"
+                const val AWAY_NAME = "AWAY_NAME"
+                const val HOME_SCORE = "HOME_SCORE"
+                const val AWAY_SCORE = "AWAY_SCORE"
+                const val HOME_GOAL_DETAILS = "HOME_GOAL_DETAILS"
+                const val AWAY_GOAL_DETAILS = "AWAY_GOAL_DETAILS"
+                const val HOME_RED_CARDS = "HOME_RED_CARDS"
+                const val AWAY_RED_CARDS = "AWAY_RED_CARDS"
+                const val HOME_YELLOW_CARDS = "HOME_YELLOW_CARDS"
+                const val AWAY_YELLOW_CARDS = "AWAY_YELLOW_CARDS"
+                const val HOME_GOALKEEPER = "HOME_GOALKEEPER"
+                const val AWAY_GOALKEEPER = "AWAY_GOALKEEPER"
+                const val HOME_DEFENDER = "HOME_DEFENDER"
+                const val AWAY_DEFENDER = "AWAY_DEFENDER"
+                const val HOME_MIDFIELD = "HOME_MIDFIELD"
+                const val AWAY_MIDFIELD = "AWAY_MIDFIELD"
+                const val HOME_FORWARD = "HOME_FORWARD"
+                const val AWAY_FORWARD = "AWAY_FORWARD"
+                const val HOME_SUBTITUTE = "HOME_SUBTITUTE"
+                const val AWAY_SUBTITUTE = "AWAY_SUBTITUTE"
+                const val HOME_SHOTS = "HOME_SHOTS"
+                const val AWAY_SHOTS = "AWAY_SHOTS"
+                const val ID_HOME = "ID_HOME"
+                const val ID_AWAY = "ID_AWAY"
+        }
+
         override fun toString(): String {
                 return super.toString()
         }

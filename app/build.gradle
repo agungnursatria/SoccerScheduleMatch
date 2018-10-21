@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+androidExtensions {
+    experimental = true
+}
 
 android {
     compileSdkVersion 28
@@ -10,12 +13,6 @@ android {
         applicationId "com.anb.soccerschedulematch"
         buildConfigField "String", "BASE_URL", "\"https://www.thesportsdb.com/\""
         buildConfigField "String", "TSDB_API_KEY", "\"1\""
-        buildConfigField "int", "ENGLISH_PREMIER_LEAGUE", "4328"
-        buildConfigField "int", "English_League_Championship", "4329"
-        buildConfigField "int", "German_Bundesliga", "4331"
-        buildConfigField "int", "Italian_seri_A", "4332"
-        buildConfigField "int", "French_Ligue_1", "4334"
-        buildConfigField "int", "Spanish_La_Liga", "4335"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

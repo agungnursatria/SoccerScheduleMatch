@@ -3,7 +3,7 @@ package com.anb.soccerschedulematch.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.anb.soccerschedulematch.feature.main.Fragment.ListMatchFragment
+import com.anb.soccerschedulematch.feature.listmatch.ListMatchFragment
 
 class MainPagerAdapter(fm: FragmentManager, val id: String) : FragmentStatePagerAdapter(fm) {
 

@@ -56,6 +56,9 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 
     androidTestImplementation("com.android.support.test.espresso:espresso-contrib:2.2.2") {
         exclude group: 'com.android.support', module: 'appcompat-v7'

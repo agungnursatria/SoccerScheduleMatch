@@ -13,7 +13,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.anb.soccerschedulematch.R
 import com.anb.soccerschedulematch.adapter.MainPagerAdapter
+import com.anb.soccerschedulematch.api.ApiRepository
 import com.anb.soccerschedulematch.model.league.LeagueResponse
+import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout
 import org.jetbrains.anko.design.coordinatorLayout
@@ -32,7 +34,9 @@ class MainActivity : AppCompatActivity(), MainView{
         MainActivityUI().setContentView(this)
         initView()
 
-        MPresenter = MainPresenterImpl()
+        val request = ApiRepository()
+        val gson = Gson()
+        MPresenter = MainPresenterImpl(request,gson)
         MPresenter.onAttach(this)
         MPresenter.initLeaguesSpinnerData()
     }

@@ -9,7 +9,7 @@ import retrofit2.Response
 
 class MainPresenterImpl<V: MainView> : BasePresenter<V>(), MainPresenter<V>{
 
-    override fun initLeaguesSpinner() {
+    override fun initLeaguesSpinnerData() {
         val leagueCall = Utils.request.getAllLeague()
         leagueCall.enqueue(object : Callback<LeagueResponse> {
             override fun onFailure(call: Call<LeagueResponse>?, t: Throwable?) {

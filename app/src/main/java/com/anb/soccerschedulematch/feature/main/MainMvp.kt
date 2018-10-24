@@ -12,5 +12,5 @@ interface MainView : MvpView{
 }
 
 interface MainPresenter<V: MvpView>: MvpPresenter<V>{
-    fun initLeaguesSpinner()
+    fun initLeaguesSpinnerData()
 }

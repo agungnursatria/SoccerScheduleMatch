@@ -24,7 +24,7 @@ import org.jetbrains.anko.support.v4.toast
 class ListMatchFragment : Fragment(), ListMatchView {
     private lateinit var rvLeague : RecyclerView
     private lateinit var swipeRefreshLayout : SwipeRefreshLayout
-    lateinit var LMPresenter : ListMatchPresenterImpl<ListMatchView>
+    lateinit var LMPresenter : ListMatchPresenter<ListMatchView>
 
     companion object {
 

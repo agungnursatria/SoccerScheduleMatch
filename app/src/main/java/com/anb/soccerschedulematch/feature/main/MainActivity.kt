@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), MainView{
     lateinit var spinnerLeague : Spinner
     lateinit var tabLayout : TabLayout
     lateinit var vp : ViewPager
-    lateinit var MPresenter : MainPresenterImpl<MainView>
+    lateinit var MPresenter : MainPresenter<MainView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainView{
 
         MPresenter = MainPresenterImpl()
         MPresenter.onAttach(this)
-        MPresenter.initLeaguesSpinner()
+        MPresenter.initLeaguesSpinnerData()
     }
 
     override fun initView(){

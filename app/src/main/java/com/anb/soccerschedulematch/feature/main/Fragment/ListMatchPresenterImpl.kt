@@ -12,9 +12,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListMatchPresenterImpl<V: ListMatchView>(var context: Context?,
-                                               var idLeague: String,
-                                               var position: Int)
+class ListMatchPresenterImpl<V: ListMatchView>(private var context: Context?,
+                                               private var idLeague: String,
+                                               private var position: Int)
     : BasePresenter<V>(), ListMatchPresenter<V>{
 
     override fun loadData() {
@@ -37,7 +37,7 @@ class ListMatchPresenterImpl<V: ListMatchView>(var context: Context?,
                 context?.database?.use {
                     val matchResponse = MatchResponse()
                     val result = select(Match.TABLE_MATCH)
-                    val favoriteMatch: ArrayList<Match> = ArrayList(result.parseList(classParser<Match>()))
+                    val favoriteMatch: ArrayList<Match> = ArrayList(result.parseList(classParser()))
                     matchResponse.matchs = favoriteMatch
                     getView().setDataToRecyclerView(matchResponse)
                 }

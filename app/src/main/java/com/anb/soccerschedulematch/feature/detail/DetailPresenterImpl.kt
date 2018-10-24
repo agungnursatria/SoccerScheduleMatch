@@ -11,7 +11,9 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
-class DetailPresenterImpl<V: DetailView>(val context: Context, var match: Match) : BasePresenter<V>(), DetailPresenter<V>{
+class DetailPresenterImpl<V: DetailView>(val context: Context,
+                                         var match: Match)
+    : BasePresenter<V>(), DetailPresenter<V>{
 
     var isFavorite = false
 

@@ -16,7 +16,7 @@ import org.jetbrains.anko.design.snackbar
 class DetailActivity : AppCompatActivity(),DetailView {
 
     var menuDetail : Menu? = null
-    lateinit var DPresenter : DetailPresenterImpl<DetailView>
+    lateinit var DPresenter : DetailPresenter<DetailView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

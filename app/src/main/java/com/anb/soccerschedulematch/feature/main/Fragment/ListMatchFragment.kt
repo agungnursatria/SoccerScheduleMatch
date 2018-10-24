@@ -1,4 +1,4 @@
-package com.anb.soccerschedulematch.feature.main
+package com.anb.soccerschedulematch.feature.main.Fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,34 +9,26 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.anb.soccerschedulematch.R
 import com.anb.soccerschedulematch.adapter.MatchScheduleAdapter
-import com.anb.soccerschedulematch.database.database
 import com.anb.soccerschedulematch.feature.detail.DetailActivity
 import com.anb.soccerschedulematch.helper.Constant
-import com.anb.soccerschedulematch.helper.Utils
-import com.anb.soccerschedulematch.model.match.Match
 import com.anb.soccerschedulematch.model.match.MatchResponse
-import com.anb.soccerschedulematch.R
 import org.jetbrains.anko.*
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.select
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import org.jetbrains.anko.support.v4.toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class ListMatchFragment : Fragment() {
+class ListMatchFragment : Fragment(), ListMatchView {
     private lateinit var rvLeague : RecyclerView
     private lateinit var swipeRefreshLayout : SwipeRefreshLayout
-    private lateinit var idLeague : String
-    private var position: Int = 0
+    lateinit var LMPresenter : ListMatchPresenterImpl<ListMatchView>
 
     companion object {
-        fun newInstance(id: String, position: Int) : ListMatchFragment{
+
+        fun newInstance(id: String, position: Int) : ListMatchFragment {
             val bundle = Bundle()
             bundle.putString(Constant.ID_LEAGUE, id)
             bundle.putInt(Constant.POSITION, position)
@@ -46,50 +38,26 @@ class ListMatchFragment : Fragment() {
             return fragment
         }
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = ListMatchFragmentUI().createView(AnkoContext.create(ctx,this))
-        arguments?.getString(Constant.ID_LEAGUE)?.let { idLeague = it }
-        arguments?.getInt(Constant.POSITION)?.let { position = it }
+        return ListMatchFragmentUI().createView(AnkoContext.create(ctx,this))
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val idLeague = arguments?.getString(Constant.ID_LEAGUE) ?: ""
+        val position = arguments?.getInt(Constant.POSITION) ?: 0
+
         initView(view)
-        loadData()
+        LMPresenter = ListMatchPresenterImpl(view.context, idLeague, position)
+        LMPresenter.onAttach(this)
+        LMPresenter.loadData()
 
         swipeRefreshLayout.onRefresh {
-            loadData()
-        }
-
-        return view
-    }
-
-    private fun loadData() {
-        swipeRefreshLayout.isRefreshing = true
-        when(position){
-            in 0..1 -> {
-                val matchCall = if (position == 0) Utils.request.getPrevMatch(idLeague) else Utils.request.getNextMatch(idLeague)
-                matchCall.enqueue(object : Callback<MatchResponse>{
-                    override fun onFailure(call: Call<MatchResponse>?, t: Throwable?) {
-                        t?.message?.let { toast(it) }
-                    }
-
-                    override fun onResponse(call: Call<MatchResponse>?, response: Response<MatchResponse>?) {
-                        response?.body()?.let { setDataToRecyclerView(it) }
-                    }
-
-                })
-            }
-            2 -> {
-                context?.database?.use {
-                    val matchResponse = MatchResponse()
-                    val result = select(Match.TABLE_MATCH)
-                    val favoriteMatch : ArrayList<Match> = ArrayList(result.parseList(classParser<Match>()))
-                    matchResponse.matchs = favoriteMatch
-                    setDataToRecyclerView(matchResponse)
-                }
-            }
+            LMPresenter.loadData()
         }
     }
 
-    private fun setDataToRecyclerView(matchResponse: MatchResponse) {
+    override fun setDataToRecyclerView(matchResponse: MatchResponse) {
         val layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
         rvLeague.layoutManager = layoutManager
 
@@ -102,14 +70,25 @@ class ListMatchFragment : Fragment() {
             rvLeague.adapter = matchScheduleAdapter
         }
 
-        swipeRefreshLayout.isRefreshing = false
+        stopRefresh()
     }
 
-    private fun initView(view: View) {
+    override fun initView(view: View) {
         rvLeague = view.find(R.id.rv_list_league)
         swipeRefreshLayout = view.find(R.id.srl_list_league)
     }
 
+    override fun showToast(message: String) {
+        toast(message)
+    }
+
+    override fun startRefresh() {
+        swipeRefreshLayout.isRefreshing = true
+    }
+
+    override fun stopRefresh() {
+        swipeRefreshLayout.isRefreshing = false
+    }
 
     class ListMatchFragmentUI: AnkoComponent<ListMatchFragment>{
         override fun createView(ui: AnkoContext<ListMatchFragment>) = with(ui){

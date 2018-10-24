@@ -11,52 +11,39 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.anb.soccerschedulematch.adapter.MainPagerAdapter
-import com.anb.soccerschedulematch.helper.Utils
-import com.anb.soccerschedulematch.model.league.LeagueResponse
 import com.anb.soccerschedulematch.R
+import com.anb.soccerschedulematch.adapter.MainPagerAdapter
+import com.anb.soccerschedulematch.model.league.LeagueResponse
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.themedTabLayout
 import org.jetbrains.anko.support.v4.viewPager
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView{
 
     lateinit var spinnerLeague : Spinner
     lateinit var tabLayout : TabLayout
     lateinit var vp : ViewPager
+    lateinit var MPresenter : MainPresenterImpl<MainView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainActivityUI().setContentView(this)
         initView()
-        initLeaguesSpinner()
+
+        MPresenter = MainPresenterImpl()
+        MPresenter.onAttach(this)
+        MPresenter.initLeaguesSpinner()
     }
 
-    private fun initView(){
+    override fun initView(){
         spinnerLeague = find(R.id.spinnerLeague)
         tabLayout = find(R.id.tabLayout)
         vp = find(R.id.vp)
     }
 
-    private fun initLeaguesSpinner(){
-        val leagueCall = Utils.request.getAllLeague()
-        leagueCall.enqueue(object : Callback<LeagueResponse>{
-            override fun onFailure(call: Call<LeagueResponse>?, t: Throwable?) {
-                t?.message?.let { toast(it) }
-            }
-
-            override fun onResponse(call: Call<LeagueResponse>?, response: Response<LeagueResponse>?) {
-                response?.body()?.let { setSpinner(it) }
-            }
-        })
-    }
-
-    private fun setSpinner(leagueResponse: LeagueResponse){
+    override fun setSpinner(leagueResponse: LeagueResponse){
         val onlySoccerLeague = leagueResponse.leagues.filter { it.strSport.equals("Soccer") }
 
         val spinnerItems = ArrayList<String>()
@@ -76,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTabLayout(idLeague: String){
+    override fun setTabLayout(idLeague: String){
         val mSectionsPagerAdapter = MainPagerAdapter(supportFragmentManager, idLeague)
         vp.adapter = mSectionsPagerAdapter
         (vp.layoutParams as CoordinatorLayout.LayoutParams).behavior = AppBarLayout.ScrollingViewBehavior()
@@ -92,6 +79,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun showToast(message: String) {
+        toast(message)
     }
 
     class MainActivityUI: AnkoComponent<MainActivity>{

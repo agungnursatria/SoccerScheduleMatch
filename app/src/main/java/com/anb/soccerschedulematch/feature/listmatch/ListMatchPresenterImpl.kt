@@ -14,12 +14,11 @@ import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 
-class ListMatchPresenterImpl<V: ListMatchView>(private var vContext: Context?,
-                                                 private var idLeague: String,
-                                                 private var position: Int,
-                                                 private val apiRepository: ApiRepository,
-                                                 private val gson: Gson,
-                                                 private val cContext: CoroutineContextProvider = CoroutineContextProvider())
+class ListMatchPresenterImpl<V: ListMatchView>(private var idLeague: String,
+                                               private var position: Int,
+                                               private val apiRepository: ApiRepository,
+                                               private val gson: Gson,
+                                               private val cContext: CoroutineContextProvider = CoroutineContextProvider())
     : BasePresenter<V>(), ListMatchPresenter<V> {
 
     override fun loadData() {
@@ -37,7 +36,7 @@ class ListMatchPresenterImpl<V: ListMatchView>(private var vContext: Context?,
                 }
             }
             2 -> {
-                vContext?.database?.use {
+                getView().getCtx()?.database?.use {
                     val matchResponse = MatchResponse()
                     val result = select(Match.TABLE_MATCH)
                     val favoriteMatch: ArrayList<Match> = ArrayList(result.parseList(classParser()))

@@ -29,12 +29,12 @@ class ListMatchPresenterImplTest{
     @Before
     fun setUp(){
         MockitoAnnotations.initMocks(this)
-        presenter = ListMatchPresenterImpl(null, "4328", 0, apiRepository, gson, TestContextProvider())
+        presenter = ListMatchPresenterImpl( "4328", 0, apiRepository, gson, TestContextProvider())
         presenter.onAttach(view)
     }
 
     @Test
-    fun testLoadDataPrevMatch(){
+    fun testLoadData(){
         val matchResponse = MatchResponse(arrayListOf())
 
         Mockito.`when`(gson.fromJson(apiRepository

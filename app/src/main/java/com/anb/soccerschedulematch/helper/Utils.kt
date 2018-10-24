@@ -2,19 +2,18 @@ package com.anb.soccerschedulematch.helper
 
 import android.view.View
 import android.widget.ImageView
-import com.anb.soccerschedulematch.api.RetroServer
+import com.anb.soccerschedulematch.api.ApiRepository
+import com.anb.soccerschedulematch.api.TheSportDBApi
 import com.anb.soccerschedulematch.model.match.Match
 import com.anb.soccerschedulematch.model.team.TeamResponse
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-    val request = RetroServer.getRequestService()
-
     fun formatDate(dateEvent : String): String {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = format.parse(dateEvent)
@@ -24,15 +23,19 @@ object Utils {
 
 
     fun getImageBadgeTeam(id : String, imageView : ImageView){
-        val teamCall : Call<TeamResponse> = request.getTeamDetail(id)
-        teamCall.enqueue(object : Callback<TeamResponse> {
-            override fun onFailure(call: Call<TeamResponse>?, t: Throwable?) {}
+        val gson = Gson()
+        val apiRepository = ApiRepository()
+        val context = CoroutineContextProvider()
 
-            override fun onResponse(call: Call<TeamResponse>?, response: Response<TeamResponse>?) {
-                response?.body()?.let { Picasso.get().load(it.teams[0].strTeamBadge).into(imageView) }
+        async(context.main){
+            val data = bg {
+                gson.fromJson(apiRepository
+                        .doRequest(TheSportDBApi.getTeamDetail(id)),
+                        TeamResponse::class.java
+                )
             }
-
-        })
+            Picasso.get().load(data.await().teams[0].strTeamBadge).into(imageView)
+        }
     }
 
     fun semicolonReplacer(text: String): String {

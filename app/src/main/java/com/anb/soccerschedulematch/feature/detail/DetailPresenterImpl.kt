@@ -11,14 +11,13 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
-class DetailPresenterImpl<V: DetailView>(val context: Context,
-                                         var match: Match)
+class DetailPresenterImpl<V: DetailView>(var match: Match)
     : BasePresenter<V>(), DetailPresenter<V>{
 
     var isFavorite = false
 
     override fun isMatchFavorite() {
-        context.database.use {
+        getView().getCtx()?.database?.use {
             match.idEvent?.let {
                 val result = select(Match.TABLE_MATCH)
                         .whereArgs("(ID_EVENT = {id})", "id" to it)
@@ -32,7 +31,7 @@ class DetailPresenterImpl<V: DetailView>(val context: Context,
     override fun addToFavorite() {
         try {
             val matchShown = Utils.removeNullString(match)
-            context.database.use {
+            getView().getCtx()?.database?.use {
                 insert(Match.TABLE_MATCH,
                         Match.ID_EVENT to matchShown.idEvent,
                         Match.HOME_NAME to matchShown.strHomeTeam,
@@ -70,7 +69,7 @@ class DetailPresenterImpl<V: DetailView>(val context: Context,
 
     override fun removeFromFavorite() {
         try {
-            context.database.use {
+            getView().getCtx()?.database?.use {
                 match.idEvent?.let {
                     delete(Match.TABLE_MATCH,
                             "(ID_EVENT = {id})", "id" to it)

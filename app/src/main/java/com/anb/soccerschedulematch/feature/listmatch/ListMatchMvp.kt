@@ -1,5 +1,6 @@
 package com.anb.soccerschedulematch.feature.listmatch
 
+import android.content.Context
 import android.view.View
 import com.anb.soccerschedulematch.feature.Base.MvpPresenter
 import com.anb.soccerschedulematch.feature.Base.MvpView
@@ -11,6 +12,7 @@ interface ListMatchView: MvpView{
     fun showToast(message: String)
     fun startRefresh()
     fun stopRefresh()
+    fun getCtx(): Context?
 }
 
 interface ListMatchPresenter<V: MvpView>: MvpPresenter<V>{

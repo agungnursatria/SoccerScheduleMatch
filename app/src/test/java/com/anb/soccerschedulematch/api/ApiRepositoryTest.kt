@@ -4,13 +4,14 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 
-class RetroServerTest {
+class ApiRepositoryTest {
 
     @Mock
-    lateinit var retroServer : RetroServer
+    lateinit var apiRepository: ApiRepository
 
     @Before
     fun setUp() {
@@ -19,8 +20,9 @@ class RetroServerTest {
 
     @Test
     fun testGetRequestService(){
-        retroServer.getRequestService()
-        Mockito.verify(retroServer).getRequestService()
+        val url = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=English%20Premier%20League"
+        apiRepository.doRequest(url)
+        verify(apiRepository).doRequest(url)
     }
 
 }

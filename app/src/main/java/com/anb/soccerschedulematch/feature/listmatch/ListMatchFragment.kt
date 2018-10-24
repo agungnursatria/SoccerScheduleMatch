@@ -1,5 +1,6 @@
 package com.anb.soccerschedulematch.feature.listmatch
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -52,7 +53,7 @@ class ListMatchFragment : Fragment(), ListMatchView {
         initView(view)
         val request = ApiRepository()
         val gson = Gson()
-        LMPresenter = ListMatchPresenterImpl(view.context, idLeague, position, request, gson)
+        LMPresenter = ListMatchPresenterImpl(idLeague, position, request, gson)
         LMPresenter.onAttach(this)
         LMPresenter.loadData()
 
@@ -92,6 +93,10 @@ class ListMatchFragment : Fragment(), ListMatchView {
 
     override fun stopRefresh() {
         swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun getCtx(): Context?{
+        return context
     }
 
     class ListMatchFragmentUI: AnkoComponent<ListMatchFragment>{

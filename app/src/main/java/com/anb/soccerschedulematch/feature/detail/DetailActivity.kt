@@ -1,5 +1,6 @@
 package com.anb.soccerschedulematch.feature.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -25,7 +26,7 @@ class DetailActivity : AppCompatActivity(),DetailView {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val match = intent.getParcelableExtra<Match>(Constant.MATCH)
-        DPresenter = DetailPresenterImpl(this, match)
+        DPresenter = DetailPresenterImpl( match)
         DPresenter.onAttach(this)
         setView(match)
     }
@@ -57,6 +58,10 @@ class DetailActivity : AppCompatActivity(),DetailView {
                         else
                             ContextCompat.getDrawable(this,
                                     R.drawable.ic_add_to_favorites)
+    }
+
+    override fun getCtx(): Context?{
+        return this
     }
 
     override fun setView(match: Match) {

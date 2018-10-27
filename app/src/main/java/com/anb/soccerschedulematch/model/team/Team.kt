@@ -1,7 +1,10 @@
 package com.anb.soccerschedulematch.model.team
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class Team(
     @SerializedName("idTeam")
@@ -203,4 +206,125 @@ data class Team(
     @SerializedName("strLocked")
     @Expose
     var strLocked: String? = null
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(idTeam)
+        parcel.writeString(idSoccerXML)
+        parcel.writeString(intLoved)
+        parcel.writeString(strTeam)
+        parcel.writeString(strTeamShort)
+        parcel.writeString(strAlternate)
+        parcel.writeString(intFormedYear)
+        parcel.writeString(strSport)
+        parcel.writeString(strLeague)
+        parcel.writeString(idLeague)
+        parcel.writeString(strDivision)
+        parcel.writeString(strManager)
+        parcel.writeString(strStadium)
+        parcel.writeString(strKeywords)
+        parcel.writeString(strRSS)
+        parcel.writeString(strStadiumThumb)
+        parcel.writeString(strStadiumDescription)
+        parcel.writeString(strStadiumLocation)
+        parcel.writeString(intStadiumCapacity)
+        parcel.writeString(strWebsite)
+        parcel.writeString(strFacebook)
+        parcel.writeString(strTwitter)
+        parcel.writeString(strInstagram)
+        parcel.writeString(strDescriptionEN)
+        parcel.writeString(strDescriptionDE)
+        parcel.writeString(strDescriptionFR)
+        parcel.writeString(strDescriptionCN)
+        parcel.writeString(strDescriptionIT)
+        parcel.writeString(strDescriptionJP)
+        parcel.writeString(strDescriptionRU)
+        parcel.writeString(strDescriptionES)
+        parcel.writeString(strDescriptionPT)
+        parcel.writeString(strDescriptionSE)
+        parcel.writeString(strDescriptionNL)
+        parcel.writeString(strDescriptionHU)
+        parcel.writeString(strDescriptionNO)
+        parcel.writeString(strDescriptionIL)
+        parcel.writeString(strDescriptionPL)
+        parcel.writeString(strGender)
+        parcel.writeString(strCountry)
+        parcel.writeString(strTeamBadge)
+        parcel.writeString(strTeamJersey)
+        parcel.writeString(strTeamLogo)
+        parcel.writeString(strTeamFanart1)
+        parcel.writeString(strTeamFanart2)
+        parcel.writeString(strTeamFanart3)
+        parcel.writeString(strTeamFanart4)
+        parcel.writeString(strTeamBanner)
+        parcel.writeString(strYoutube)
+        parcel.writeString(strLocked)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Team> {
+        override fun createFromParcel(parcel: Parcel): Team {
+            return Team(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Team?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+}

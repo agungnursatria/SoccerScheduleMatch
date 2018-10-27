@@ -14,6 +14,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
+    private val gson = Gson()
+    private val apiRepository = ApiRepository()
+    private val context = CoroutineContextProvider()
+
     fun formatDate(dateEvent : String): String {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = format.parse(dateEvent)
@@ -21,11 +25,7 @@ object Utils {
                 .format(date).toString()
     }
 
-
     fun getImageBadgeTeam(id : String, imageView : ImageView){
-        val gson = Gson()
-        val apiRepository = ApiRepository()
-        val context = CoroutineContextProvider()
 
         async(context.main){
             val data = bg {
@@ -34,7 +34,7 @@ object Utils {
                         TeamResponse::class.java
                 )
             }
-            Picasso.get().load(data.await().teams[0].strTeamBadge).into(imageView)
+            data.await().teams?.let { Picasso.get().load(it[0].strTeamBadge).into(imageView) }
         }
     }
 

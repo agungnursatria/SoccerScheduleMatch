@@ -13,4 +13,14 @@
     <item name="tvHomeTeamScore" type="id" />
     <item name="tvAwayTeamScore" type="id" />
     <item name="middleStrip" type="id" />
+    <item name="team_badge" type="id" />
+    <item name="team_name" type="id" />
+    <item name="list_team" type="id" />
+    <item name="spinnerLeagueTeam" type="id" />
+    <item name="srl_list_team" type="id" />
+    <item name="rv_team" type="id" />
+    <item name="pb_team" type="id" />
+    <item name="iv_player" type="id" />
+    <item name="tv_playerName" type="id" />
+    <item name="tv_playerPosition" type="id" />
 </resources>

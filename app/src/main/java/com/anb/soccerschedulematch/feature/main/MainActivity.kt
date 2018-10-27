@@ -12,7 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.anb.soccerschedulematch.R
-import com.anb.soccerschedulematch.adapter.MainPagerAdapter
+import com.anb.soccerschedulematch.adapter.MatchPagerAdapter
 import com.anb.soccerschedulematch.api.ApiRepository
 import com.anb.soccerschedulematch.model.league.LeagueResponse
 import com.google.gson.Gson
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainView{
         MPresenter.initLeaguesSpinnerData()
     }
 
-    override fun initView(){
+    fun initView(){
         spinnerLeague = find(R.id.spinnerLeague)
         tabLayout = find(R.id.tabLayout)
         vp = find(R.id.vp)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), MainView{
     }
 
     override fun setTabLayout(idLeague: String){
-        val mSectionsPagerAdapter = MainPagerAdapter(supportFragmentManager, idLeague)
+        val mSectionsPagerAdapter = MatchPagerAdapter(supportFragmentManager, idLeague)
         vp.adapter = mSectionsPagerAdapter
         (vp.layoutParams as CoordinatorLayout.LayoutParams).behavior = AppBarLayout.ScrollingViewBehavior()
 

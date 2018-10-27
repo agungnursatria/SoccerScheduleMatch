@@ -4,6 +4,7 @@ import com.anb.soccerschedulematch.api.ApiRepository
 import com.anb.soccerschedulematch.api.TheSportDBApi
 import com.anb.soccerschedulematch.database.database
 import com.anb.soccerschedulematch.feature.Base.BasePresenter
+import com.anb.soccerschedulematch.helper.Constant
 import com.anb.soccerschedulematch.helper.CoroutineContextProvider
 import com.anb.soccerschedulematch.model.match.Match
 import com.anb.soccerschedulematch.model.match.MatchResponse
@@ -37,7 +38,7 @@ class ListMatchPresenterImpl<V: ListMatchView>(private var idLeague: String,
             2 -> {
                 getView().getCtx()?.database?.use {
                     val matchResponse = MatchResponse()
-                    val result = select(Match.TABLE_MATCH)
+                    val result = select(Constant.TABLE_MATCH)
                     val favoriteMatch: ArrayList<Match> = ArrayList(result.parseList(classParser()))
                     matchResponse.matchs = favoriteMatch
                     getView().setDataToRecyclerView(matchResponse)

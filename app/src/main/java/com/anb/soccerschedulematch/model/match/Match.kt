@@ -1,11 +1,11 @@
 package com.anb.soccerschedulematch.model.match
 
+import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class Match (
         @SerializedName("idEvent")
         @Expose
@@ -114,37 +114,79 @@ data class Match (
 
 ) : Parcelable {
 
-        companion object {
-                const val TABLE_MATCH = "TABLE_MATCH"
-                const val ID_EVENT = "ID_EVENT"
-                const val HOME_NAME = "HOME_HAME"
-                const val AWAY_NAME = "AWAY_NAME"
-                const val HOME_SCORE = "HOME_SCORE"
-                const val AWAY_SCORE = "AWAY_SCORE"
-                const val HOME_GOAL_DETAILS = "HOME_GOAL_DETAILS"
-                const val HOME_RED_CARDS = "HOME_RED_CARDS"
-                const val HOME_YELLOW_CARDS = "HOME_YELLOW_CARDS"
-                const val HOME_GOALKEEPER = "HOME_GOALKEEPER"
-                const val HOME_DEFENDER = "HOME_DEFENDER"
-                const val HOME_MIDFIELD = "HOME_MIDFIELD"
-                const val HOME_FORWARD = "HOME_FORWARD"
-                const val HOME_SUBTITUTE = "HOME_SUBTITUTE"
-                const val AWAY_RED_CARDS = "AWAY_RED_CARDS"
-                const val AWAY_YELLOW_CARDS = "AWAY_YELLOW_CARDS"
-                const val AWAY_GOAL_DETAILS = "AWAY_GOAL_DETAILS"
-                const val AWAY_GOALKEEPER = "AWAY_GOALKEEPER"
-                const val AWAY_DEFENDER = "AWAY_DEFENDER"
-                const val AWAY_MIDFIELD = "AWAY_MIDFIELD"
-                const val AWAY_FORWARD = "AWAY_FORWARD"
-                const val AWAY_SUBTITUTE = "AWAY_SUBTITUTE"
-                const val HOME_SHOTS = "HOME_SHOTS"
-                const val AWAY_SHOTS = "AWAY_SHOTS"
-                const val DATE_EVENT = "DATE_EVENT"
-                const val ID_HOME = "ID_HOME"
-                const val ID_AWAY = "ID_AWAY"
+        constructor(parcel: Parcel) : this(
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString()) {
         }
 
         override fun toString(): String {
                 return super.toString()
+        }
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+                parcel.writeString(idEvent)
+                parcel.writeString(strHomeTeam)
+                parcel.writeString(strAwayTeam)
+                parcel.writeString(strHomeScore)
+                parcel.writeString(strAwayScore)
+                parcel.writeString(strHomeGoalDetails)
+                parcel.writeString(strHomeRedCards)
+                parcel.writeString(strHomeYellowCards)
+                parcel.writeString(strHomeLineupGoalkeeper)
+                parcel.writeString(strHomeLineupDefense)
+                parcel.writeString(strHomeLineupMidfield)
+                parcel.writeString(strHomeLineupForward)
+                parcel.writeString(strHomeLineupSubstitutes)
+                parcel.writeString(strAwayRedCards)
+                parcel.writeString(strAwayYellowCards)
+                parcel.writeString(strAwayGoalDetails)
+                parcel.writeString(strAwayLineupGoalkeeper)
+                parcel.writeString(strAwayLineupDefense)
+                parcel.writeString(strAwayLineupMidfield)
+                parcel.writeString(strAwayLineupForward)
+                parcel.writeString(strAwayLineupSubstitutes)
+                parcel.writeString(strHomeShots)
+                parcel.writeString(strAwayShots)
+                parcel.writeString(dateEvent)
+                parcel.writeString(idHomeTeam)
+                parcel.writeString(idAwayTeam)
+        }
+
+        override fun describeContents(): Int {
+                return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<Match> {
+                override fun createFromParcel(parcel: Parcel): Match {
+                        return Match(parcel)
+                }
+
+                override fun newArray(size: Int): Array<Match?> {
+                        return arrayOfNulls(size)
+                }
         }
 }

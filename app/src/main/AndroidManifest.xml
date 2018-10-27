@@ -11,7 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.main.MainActivity">
+        <activity
+            android:name=".feature.main.MainActivity"
+            android:label="Football Match List" />
+        <activity
+            android:name=".feature.detail.DetailActivity"
+            android:label="Match Detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".feature.home.HomeActivity"
+            android:label="Football Match Schedule"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +29,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.detail.DetailActivity"
-            android:label="Match Detail"
+            android:name=".feature.detailteam.DetailTeamActivity"
+            android:label="Team Detail"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".feature.detailplayer.DetailPlayerActivity"
+            android:label="@string/title_activity_detail_player"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

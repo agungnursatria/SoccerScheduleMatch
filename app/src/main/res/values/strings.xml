@@ -9,4 +9,7 @@
         <item>Spanish La Liga</item>
     </array>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_detail_team">DetailTeamActivity</string>
+    <string name="title_activity_detail_player">DetailPlayerActivity</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import com.anb.soccerschedulematch.database.database
 import com.anb.soccerschedulematch.feature.Base.BasePresenter
+import com.anb.soccerschedulematch.helper.Constant
 import com.anb.soccerschedulematch.helper.Utils
 import com.anb.soccerschedulematch.model.match.Match
 import org.jetbrains.anko.db.classParser
@@ -19,7 +20,7 @@ class DetailPresenterImpl<V: DetailView>(var match: Match)
     override fun isMatchFavorite() {
         getView().getCtx()?.database?.use {
             match.idEvent?.let {
-                val result = select(Match.TABLE_MATCH)
+                val result = select(Constant.TABLE_MATCH)
                         .whereArgs("(ID_EVENT = {id})", "id" to it)
                 val favorite = result.parseList(classParser<Match>())
                 if (!favorite.isEmpty()) isFavorite = true
@@ -32,33 +33,33 @@ class DetailPresenterImpl<V: DetailView>(var match: Match)
         try {
             val matchShown = Utils.removeNullString(match)
             getView().getCtx()?.database?.use {
-                insert(Match.TABLE_MATCH,
-                        Match.ID_EVENT to matchShown.idEvent,
-                        Match.HOME_NAME to matchShown.strHomeTeam,
-                        Match.AWAY_NAME to matchShown.strAwayTeam,
-                        Match.HOME_SCORE to matchShown.strHomeScore,
-                        Match.AWAY_SCORE to matchShown.strAwayScore,
-                        Match.HOME_GOAL_DETAILS to matchShown.strHomeGoalDetails,
-                        Match.HOME_RED_CARDS to matchShown.strHomeRedCards,
-                        Match.HOME_YELLOW_CARDS to matchShown.strHomeYellowCards,
-                        Match.HOME_GOALKEEPER to matchShown.strHomeLineupGoalkeeper,
-                        Match.HOME_DEFENDER to matchShown.strHomeLineupDefense,
-                        Match.HOME_MIDFIELD to matchShown.strHomeLineupMidfield,
-                        Match.HOME_FORWARD to matchShown.strHomeLineupForward,
-                        Match.HOME_SUBTITUTE to matchShown.strHomeLineupSubstitutes,
-                        Match.AWAY_RED_CARDS to matchShown.strAwayRedCards,
-                        Match.AWAY_YELLOW_CARDS to matchShown.strAwayYellowCards,
-                        Match.AWAY_GOAL_DETAILS to matchShown.strHomeGoalDetails,
-                        Match.AWAY_GOALKEEPER to matchShown.strAwayLineupGoalkeeper,
-                        Match.AWAY_DEFENDER to matchShown.strAwayLineupDefense,
-                        Match.AWAY_MIDFIELD to matchShown.strAwayLineupMidfield,
-                        Match.AWAY_FORWARD to matchShown.strAwayLineupForward,
-                        Match.AWAY_SUBTITUTE to matchShown.strAwayLineupSubstitutes,
-                        Match.HOME_SHOTS to matchShown.strHomeShots,
-                        Match.AWAY_SHOTS to matchShown.strAwayShots,
-                        Match.DATE_EVENT to matchShown.dateEvent,
-                        Match.ID_HOME to matchShown.idHomeTeam,
-                        Match.ID_AWAY to matchShown.idAwayTeam
+                insert(Constant.TABLE_MATCH,
+                        Constant.ID_EVENT to matchShown.idEvent,
+                        Constant.HOME_NAME to matchShown.strHomeTeam,
+                        Constant.AWAY_NAME to matchShown.strAwayTeam,
+                        Constant.HOME_SCORE to matchShown.strHomeScore,
+                        Constant.AWAY_SCORE to matchShown.strAwayScore,
+                        Constant.HOME_GOAL_DETAILS to matchShown.strHomeGoalDetails,
+                        Constant.HOME_RED_CARDS to matchShown.strHomeRedCards,
+                        Constant.HOME_YELLOW_CARDS to matchShown.strHomeYellowCards,
+                        Constant.HOME_GOALKEEPER to matchShown.strHomeLineupGoalkeeper,
+                        Constant.HOME_DEFENDER to matchShown.strHomeLineupDefense,
+                        Constant.HOME_MIDFIELD to matchShown.strHomeLineupMidfield,
+                        Constant.HOME_FORWARD to matchShown.strHomeLineupForward,
+                        Constant.HOME_SUBTITUTE to matchShown.strHomeLineupSubstitutes,
+                        Constant.AWAY_RED_CARDS to matchShown.strAwayRedCards,
+                        Constant.AWAY_YELLOW_CARDS to matchShown.strAwayYellowCards,
+                        Constant.AWAY_GOAL_DETAILS to matchShown.strHomeGoalDetails,
+                        Constant.AWAY_GOALKEEPER to matchShown.strAwayLineupGoalkeeper,
+                        Constant.AWAY_DEFENDER to matchShown.strAwayLineupDefense,
+                        Constant.AWAY_MIDFIELD to matchShown.strAwayLineupMidfield,
+                        Constant.AWAY_FORWARD to matchShown.strAwayLineupForward,
+                        Constant.AWAY_SUBTITUTE to matchShown.strAwayLineupSubstitutes,
+                        Constant.HOME_SHOTS to matchShown.strHomeShots,
+                        Constant.AWAY_SHOTS to matchShown.strAwayShots,
+                        Constant.DATE_EVENT to matchShown.dateEvent,
+                        Constant.ID_HOME to matchShown.idHomeTeam,
+                        Constant.ID_AWAY to matchShown.idAwayTeam
                 )
             }
             getView().showSnackbar("Added to favorite")
@@ -71,7 +72,7 @@ class DetailPresenterImpl<V: DetailView>(var match: Match)
         try {
             getView().getCtx()?.database?.use {
                 match.idEvent?.let {
-                    delete(Match.TABLE_MATCH,
+                    delete(Constant.TABLE_MATCH,
                             "(ID_EVENT = {id})", "id" to it)
                 }
             }
